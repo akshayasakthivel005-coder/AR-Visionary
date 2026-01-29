@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Education | AR Visionary</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script type="module"
+  src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
+</script>
+
+<style>
+body{
+  margin:0;
+  font-family:"Segoe UI", Arial, sans-serif;
+  background: linear-gradient(180deg,#f7f9fc,#f2f4f9);
+  color:#1f2a44;
+}
+
+/* HEADER */
+header{
+  padding:30px 40px 10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+header h1{
+  margin:0;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+
+/* BACK BUTTON */
+.back-btn{
+  background: hsl(219, 61%, 90%);
+  border:none;
+  padding:10px 18px;
+  border-radius:10px;
+  font-size:13px;
+  cursor:pointer;
+  color:#1f2a44;
+  box-shadow:0 6px 14px rgba(31,42,68,0.12);
+  transition:0.25s;
+}
+.back-btn:hover{
+  background: hsl(219, 61%, 85%);
+  transform:translateY(-1px);
+}
+
+/* HORIZONTAL MENU */
+.menu-bar{
+  display:flex;
+  gap:14px;
+  padding:20px 40px 10px;
+  flex-wrap:wrap;
+}
+.menu-item{
+  padding:12px 22px;
+  background: hsl(219, 61%, 90%);
+  border-radius:28px;
+  cursor:pointer;
+  font-size:14px;
+  box-shadow:0 6px 16px rgba(31,42,68,0.08);
+  transition:0.25s;
+}
+.menu-item:hover{
+  background: hsl(219, 61%, 85%);
+  transform:translateY(-2px);
+}
+
+/* MODEL VIEW */
+.viewer-box{
+  margin:20px 40px 40px;
+  background:#ffffff;
+  padding:20px;
+  border-radius:20px;
+  border:1px solid #e1e5eb;
+}
+model-viewer{
+  width:100%;
+  height:420px;
+  background:#f8f9fb;
+  border-radius:14px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Education</h1>
+  <button class="back-btn" onclick="goBack()">Back to Collections</button>
+</header>
+
+<div class="menu-bar">
+  <div class="menu-item" onclick="loadModel('models/education/globe.glb')">Globe</div>
+  <div class="menu-item" onclick="loadModel('models/education/solar_system.glb')">Solar System</div>
+  <div class="menu-item" onclick="loadModel('models/education/mars.glb')">Mars</div>
+  <div class="menu-item" onclick="loadModel('models/education/human_heart.glb')">Human Heart</div>
+</div>
+
+<div class="viewer-box">
+  <model-viewer id="viewer" camera-controls auto-rotate ar></model-viewer>
+</div>
+
+<script>
+function loadModel(src){
+  document.getElementById("viewer").src = src;
+}
+function goBack(){
+  window.location.href="index.html";
+}
+</script>
+
+</body>
+</html>

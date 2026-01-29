@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AR Camera | AR Visionary</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- A-Frame + AR.js -->
+<script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+
+<style>
+body{
+  margin:0;
+  overflow:hidden;
+  font-family:Arial, sans-serif;
+}
+.top-bar{
+  position:fixed;
+  top:12px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(255,255,255,0.9);
+  padding:10px 18px;
+  border-radius:12px;
+  font-size:14px;
+  z-index:10;
+}
+.back-btn{
+  position:fixed;
+  bottom:16px;
+  right:16px;
+  background:#4b6cb7;
+  color:#fff;
+  border:none;
+  padding:10px 16px;
+  border-radius:10px;
+  font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-bar">
+  Point camera at flat surface – 3D object will appear
+</div>
+
+<button class="back-btn" onclick="goBack()">Back</button>
+
+<a-scene
+  embedded
+  arjs="sourceType: webcam; debugUIEnabled: false;"
+  renderer="logarithmicDepthBuffer: true;"
+>
+
+  <!-- LIGHT -->
+  <a-entity light="type: ambient; intensity: 1"></a-entity>
+
+  <!-- 3D MODEL (TEST MODEL) -->
+  <a-entity
+    gltf-model="models/education/globe.glb"
+    scale="0.5 0.5 0.5"
+    position="0 0 -2"
+    rotation="0 180 0">
+  </a-entity>
+
+  <!-- CAMERA -->
+  <a-camera position="0 1.6 0"></a-camera>
+
+</a-scene>
+
+<script>
+function goBack(){
+  window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>

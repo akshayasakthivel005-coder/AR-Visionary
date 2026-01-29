@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AR-VISIONARY</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Model Viewer -->
+  <script type="module"
+    src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(180deg, #f7f9fc 0%, #f2f4f9 100%);
+      color: #2b2b2b;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 90px 20px 60px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-family: "Segoe UI Semibold", "Segoe UI", Arial, sans-serif;
+      font-size: 40px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      color: #1f2a44;
+    }
+
+    .hero p {
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #6b7894;
+    }
+
+    /* SEARCH */
+    .search-area {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .search-area input {
+      width: 260px;
+      padding: 11px 14px;
+      border: 1px solid #cfd6df;
+      border-radius: 10px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .search-btn {
+      background: #66baea;
+      color: #ffffff;
+      padding: 11px 22px;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+    }
+
+    .camera-btn {
+      background: #ffffff;
+      color: #1f2a44;
+      padding: 11px 22px;
+      border: 1px solid #cfd6df;
+      border-radius: 10px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    /* MAIN */
+    main {
+      padding: 50px 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+      color: #1f2a44;
+      margin-bottom: 40px;
+    }
+
+    /* COLLECTIONS */
+    .collections {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 28px;
+    }
+
+    .collection-card {
+      background: hsl(219, 61%, 90%);
+      border-radius: 20px;
+      padding: 42px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.35s ease;
+      box-shadow: 0 8px 20px rgba(31, 42, 68, 0.08);
+    }
+
+    .collection-card:hover {
+      background: #d6def5;
+      transform: translateY(-6px);
+      box-shadow: 0 12px 28px rgba(31, 42, 68, 0.15);
+    }
+
+    .collection-card h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      color: #1f2a44;
+    }
+
+    /* MODEL VIEWER */
+    .viewer-container {
+      margin-top: 60px;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 22px;
+      border: 1px solid #e1e5eb;
+      box-shadow: 0 10px 26px rgba(31, 42, 68, 0.08);
+      display: none;
+    }
+
+    model-viewer {
+      width: 100%;
+      height: 420px;
+      background: #f8f9fb;
+      border-radius: 14px;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 22px;
+      font-size: 13px;
+      color: #666;
+      border-top: 1px solid #d6dbe3;
+      background: #f5f7fb;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>AR-VISIONARY</h1>
+    <p>Real-Time Text to 3D Objects Visualizer</p>
+
+    <div class="search-area">
+      <input type="text" id="searchInput" placeholder="Search model (English / Tamil)" />
+      <button class="search-btn" onclick="searchModel()">Search</button>
+      <button class="camera-btn">Camera</button>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main>
+    <div class="section-title">Collections</div>
+
+    <div class="collections">
+      <div class="collection-card" onclick="goTo('education.html')"><h3>Education</h3></div>
+      <div class="collection-card" onclick="goTo('furniture.html')"><h3>Furniture</h3></div>
+      <div class="collection-card" onclick="goTo('architecture.html')"><h3>Architecture</h3></div>
+      <div class="collection-card" onclick="goTo('product.html')"><h3>Product Showcase</h3></div>
+    </div>
+
+    <!-- MODEL VIEW -->
+    <div class="viewer-container" id="viewerContainer">
+      <model-viewer
+  id="modelViewer"
+  src=""
+  camera-controls
+  auto-rotate
+  ar
+  ar-modes="scene-viewer webxr quick-look"
+  shadow-intensity="1"
+  exposure="1"
+  camera-orbit="0deg 75deg 2.5m"
+  min-camera-orbit="auto auto 1m"
+  max-camera-orbit="auto auto 6m">
+</model-viewer>
+
+    </div>
+  </main>
+
+  <footer>
+    AR Visionary • Final Year Project
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    const modelMap = {
+      // EDUCATION
+      "globe": "models/education/globe.glb",
+      "earth": "models/education/globe.glb",
+      "உலகம்": "models/education/globe.glb",
+      "பூமி": "models/education/globe.glb",
+
+      "solar system": "models/education/solar_system.glb",
+      "planets": "models/education/solar_system.glb",
+      "சூரிய குடும்பம்": "models/education/solar_system.glb",
+
+      "mars": "models/education/mars.glb",
+      "செவ்வாய்": "models/education/mars.glb",
+
+      "human heart": "models/education/human_heart.glb",
+      "heart": "models/education/human_heart.glb",
+      "மனித இதயம்": "models/education/human_heart.glb",
+      "இதயம்": "models/education/human_heart.glb",
+
+      // FURNITURE
+      "chair": "models/furniture/chair.glb",
+      "நாற்காலி": "models/furniture/chair.glb",
+
+      "sofa": "models/furniture/sofa.glb",
+      "couch": "models/furniture/sofa.glb",
+      "சோபா": "models/furniture/sofa.glb",
+
+      "bed": "models/furniture/bed.glb",
+      "படுக்கை": "models/furniture/bed.glb",
+
+      // ARCHITECTURE
+      "house": "models/architecture/house.glb",
+      "home": "models/architecture/house.glb",
+      "வீடு": "models/architecture/house.glb",
+
+      "bridge": "models/architecture/bridge.glb",
+      "பாலம்": "models/architecture/bridge.glb",
+
+      "skyscraper": "models/architecture/skyscraper.glb",
+      "building": "models/architecture/skyscraper.glb",
+      "வானளாவிய கட்டிடம்": "models/architecture/skyscraper.glb",
+
+      // PRODUCT
+      "dress": "models/product/dress.glb",
+      "clothes": "models/product/dress.glb",
+      "உடை": "models/product/dress.glb",
+
+      "shoe": "models/product/shoe.glb",
+      "shoes": "models/product/shoe.glb",
+      "காலணி": "models/product/shoe.glb",
+
+      "smart phone": "models/product/smart_phone.glb",
+      "mobile": "models/product/smart_phone.glb",
+      "மொபைல்": "models/product/smart_phone.glb",
+      "கைபேசி": "models/product/smart_phone.glb"
+    };
+
+    function searchModel() {
+      const input = document.getElementById("searchInput").value.trim();
+      const viewer = document.getElementById("modelViewer");
+      const container = document.getElementById("viewerContainer");
+
+      const key = Object.keys(modelMap).find(
+        k => k === input || k === input.toLowerCase()
+      );
+
+      if (key) {
+        viewer.src = modelMap[key];
+container.style.display = "block";
+
+container.scrollIntoView({
+  behavior: "smooth"
+});
+
+      } else {
+        alert("Model not found");
+      }
+    }
+
+    function goTo(page) {
+      window.location.href = page;
+    }
+  </script>
+
+</body>
+</html>
